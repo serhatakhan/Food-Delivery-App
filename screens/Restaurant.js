@@ -14,6 +14,7 @@ const Restaurant = ({route, navigation}) => {
   const scrollX = new Animated.Value(0);
   const [restaurant, setRestaurant] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
+  const [orderItems, setOrderItems] = useState([]);
 
   useEffect(() => {
     // * home screen'den yolladığımız item ve currentLocation'ı,
@@ -23,6 +24,64 @@ const Restaurant = ({route, navigation}) => {
     setRestaurant(item);
     setCurrentLocation(currentLocation);
   }, []);
+
+
+  // sipariş sayısını düzenle
+  function editOrder(action, menuId, price) {
+    let orderList = orderItems.slice();
+    let item = orderList.filter(a => a.menuId == menuId);
+
+    if (action == '+') {
+      if (item.length > 0) {
+        let newQty = item[0].qty + 1;
+        item[0].qty = newQty;
+        item[0].total = item[0].qty * price;
+      } else {
+        const newItem = {
+          menuId: menuId,
+          qty: 1,
+          price: price,
+          total: price,
+        };
+        orderList.push(newItem);
+      }
+
+      setOrderItems(orderList);
+    } else {
+      if (item.length > 0) {
+        if (item[0]?.qty > 0) {
+          let newQty = item[0].qty - 1;
+          item[0].qty = newQty;
+          item[0].total = newQty * price;
+        }
+      }
+
+      setOrderItems(orderList);
+    }
+  }
+
+  function getOrderQty(menuId) {
+    let orderItem = orderItems.filter(a => a.menuId == menuId);
+
+    if (orderItem.length > 0) {
+      return orderItem[0].qty;
+    }
+    return 0;
+  }
+
+  // ürün miktarı kısmını düzenle
+  function getBasketItemCount() {
+    let itemCount = orderItems.reduce((a, b) => a + (b.qty || 0), 0);
+
+    return itemCount;
+  }
+
+  function sumOrder() {
+    let total = orderItems.reduce((a, b) => a + (b.total || 0), 0);
+
+    return total.toFixed(2);
+  }
+
 
   // HEADER
   function renderHeader() {
@@ -109,6 +168,7 @@ const Restaurant = ({route, navigation}) => {
                   flexDirection: 'row',
                 }}>
                 <TouchableOpacity
+                  onPress={() => editOrder('-', item.menuId, item.price)}
                   style={{
                     width: 50,
                     backgroundColor: COLORS.white,
@@ -127,10 +187,11 @@ const Restaurant = ({route, navigation}) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                  <Text style={{...FONTS.h2}}>3</Text>
+                  <Text style={{...FONTS.h2}}>{getOrderQty(item.menuId)}</Text>
                 </View>
 
                 <TouchableOpacity
+                  onPress={() => editOrder('+', item.menuId, item.price)}
                   style={{
                     width: 50,
                     backgroundColor: COLORS.white,
@@ -248,8 +309,8 @@ const Restaurant = ({route, navigation}) => {
               borderBottomColor: COLORS.lightGray2,
               borderBottomWidth: 1,
             }}>
-            <Text style={{...FONTS.h3}}>products in cart</Text>
-            <Text style={{...FONTS.h3}}>$45</Text>
+            <Text style={{...FONTS.h3}}>{getBasketItemCount()} products in cart</Text>
+            <Text style={{...FONTS.h3}}>${sumOrder()}</Text>
           </View>
 
           <View
@@ -270,15 +331,50 @@ const Restaurant = ({route, navigation}) => {
               </Text>
             </View>
 
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image
                 source={icons.master_card}
                 resizeMode="contain"
                 style={{width: 20, height: 20, tintColor: COLORS.darkgray}}
               />
+              <Text style={{marginLeft: SIZES.padding, ...FONTS.h4}}>9999</Text>
             </View>
           </View>
+
+          {/* Order Button */}
+          <View
+            style={{
+              padding: SIZES.padding,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <TouchableOpacity
+              onPress={()=> navigation.navigate("OrderDelivery", {
+                restaurant: restaurant,
+                currentLocation: currentLocation
+              })}
+              style={{
+                width: SIZES.width * 0.9,
+                padding: SIZES.padding,
+                backgroundColor: COLORS.primary,
+                alignItems: 'center',
+                borderRadius: SIZES.radius,
+              }}>
+              <Text style={{color: COLORS.white, ...FONTS.h2}}>Order Now</Text>
+            </TouchableOpacity>
+          </View>
         </View>
+
+        {/* Butonun alt tarafında boşluk vardı. orayı kapatmış olduk */}
+        <View
+          style={{
+            position: 'absolute',
+            bottom: -34,
+            left: 0,
+            right: 0,
+            height: 34,
+            backgroundColor: COLORS.white,
+          }}></View>
       </View>
     );
   }
