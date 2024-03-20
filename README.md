@@ -21,5 +21,6 @@ This project includes a React Native application where users can place food orde
 
 ## Screen Gif
 
+![EkranKayd2024-03-2013 06 46-ezgif com-video-to-gif-converter](https://github.com/serhatakhan/Food-Delivery-App/assets/147662915/3198e8ad-4e43-431f-9494-b1e8169fe317)
 
 
