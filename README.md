@@ -1,79 +1,25 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native Food Delivery App
 
-# Getting Started
+This project includes a React Native application where users can place food orders from restaurants and track their delivery in real-time. The mobile app allows users to explore a range of restaurants, view menus from their selected restaurant, customize their orders, and utilize real-time location tracking on a map to monitor deliveries.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features
 
-## Step 1: Start the Metro Server
+**`Home Screen:`** Users are directed to a home screen where they can explore restaurants and place orders from their preferred restaurant. The home screen includes elements such as restaurant cards and a search bar.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+**`Restaurant Pages:`** Each restaurant has its own page where users can view the restaurant's name, menu items, location, and other details. Additionally, users can add or remove items from the restaurant's menu.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+**`Order Tracking:`** Users can track the status of their placed orders, including preparation, delivery process, and completion status. Order tracking is displayed in real-time on a map.
 
-```bash
-# using npm
-npm start
+**`Map View:`** Users can track the delivery of their orders on a map. The map displays the user's location, the restaurant's location, and the delivery driver's location. Estimated time of arrival and the delivery driver's travel route are also shown on the map.
 
-# OR using Yarn
-yarn start
-```
+## Used Technologies
 
-## Step 2: Start your Application
+* **React Native:** The application was developed using React Native, a framework that can run on both iOS and Android platforms.
+* **React Navigation:** React Navigation library was used for navigation between screens.
+* **React Native Maps:** React Native Maps was used to provide map views.
+* **Google Maps API:** Google Maps API was used for map directions and location information.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## Screen Gif
 
-### For Android
 
-```bash
-# using npm
-npm run android
 
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
